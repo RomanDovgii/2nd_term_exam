@@ -12,6 +12,9 @@
           </NuxtLink>
         </div>
       </v-app-bar-title>
+      <NuxtLink to="/about" style="text-decoration: none; color: #fff; margin-left: auto">
+          О нас
+      </NuxtLink>
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
