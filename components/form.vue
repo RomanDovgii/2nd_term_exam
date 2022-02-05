@@ -149,7 +149,6 @@
     computed: {
       form: function () {
         this.$store.dispatch('GET_FORM_DATA');
-        console.log(this.$store.getters.GET_FORM_DATA);
         return this.$store.getters.GET_FORM_DATA;
       }
     }

@@ -58,7 +58,7 @@ export default () => new Vuex.Store({
       }
     },
     GET_SIDE_DATA({commit}) {
-      if (Object.keys(this.state.sideContent).length === 0) {      
+      if (Object.keys(this.state.sideContent).length === 0) {
         api.get(ApiRoutes.GET_SIDE_CONTENT)
         .then(({data}) => {
           commit('SET_SIDE_CONTENT', data);
@@ -108,12 +108,18 @@ export default () => new Vuex.Store({
         break;
       }
 
-      console.log(payload);
-
       new api.post(ApiRoutes.ADD_EVENT, payload)
       .then((res) => {
       })
       .catch((err) => console.log(err));
+
+      api.get(ApiRoutes.GET_EVENTS)
+        .then(({data}) => {
+          commit('SET_EVENTS', data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
     }
   },
   modules: {},

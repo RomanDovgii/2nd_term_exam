@@ -20,45 +20,54 @@
       <v-container>
         <Form/>
       </v-container>
-      <div v-if="events.length !== 0">
-        <v-container>
-          <v-row align="stretch">
-            <v-col
-              v-for="event in events"
-              v-bind:key="event.id"
-              cols = 2
-              >
-                <div v-if="event.acid_power">
-                  <EventCard
-                  v-bind:type = event.type
-                  v-bind:acid_power = event.acid_power
-                  v-bind:victims = event.victims
-                  v-bind:date = event.date
-                  v-bind:id = event.id
-                  />
-                </div>
-                <div v-if="event.earthquake_power">
-                  <EventCard
-                  v-bind:type = event.type
-                  v-bind:earthquake_power = event.earthquake_power
-                  v-bind:victims = event.victims
-                  v-bind:date = event.date
-                  v-bind:id = event.id
-                  />
-                </div>
-                <div v-if="event.wind_speed">
-                  <EventCard
-                  v-bind:type = event.type
-                  v-bind:wind_speed = event.wind_speed
-                  v-bind:victims = event.victims
-                  v-bind:date = event.date
-                  v-bind:id = event.id
-                  />
-                </div>
-                
-            </v-col>
-          </v-row>
-        </v-container>
+      <div v-if="((events.length === 0))">
+        <v-progress-circular
+        indeterminate
+        color="red"
+        >
+        </v-progress-circular>
+      </div>
+      <div v-else>
+        <div v-if="events.length !== 0">
+          <v-container>
+            <v-row align="stretch">
+              <v-col
+                v-for="event in events"
+                v-bind:key="event.id"
+                cols = 2
+                >
+                  <div v-if="event.acid_power">
+                    <EventCard
+                    v-bind:type = event.type
+                    v-bind:acid_power = event.acid_power
+                    v-bind:victims = event.victims
+                    v-bind:date = event.date
+                    v-bind:id = event.id
+                    />
+                  </div>
+                  <div v-if="event.earthquake_power">
+                    <EventCard
+                    v-bind:type = event.type
+                    v-bind:earthquake_power = event.earthquake_power
+                    v-bind:victims = event.victims
+                    v-bind:date = event.date
+                    v-bind:id = event.id
+                    />
+                  </div>
+                  <div v-if="event.wind_speed">
+                    <EventCard
+                    v-bind:type = event.type
+                    v-bind:wind_speed = event.wind_speed
+                    v-bind:victims = event.victims
+                    v-bind:date = event.date
+                    v-bind:id = event.id
+                    />
+                  </div>
+                  
+              </v-col>
+            </v-row>
+          </v-container>
+        </div>
       </div>
       </div>
     </v-main>
@@ -85,6 +94,7 @@
         return this.$store.getters.GET_HOME_DATA;
       },
       events: function () {
+        const empty = this.$store.getters.GET_EVENTS_DATA;
         this.$store.dispatch('GET_EVENTS_DATA');
         return this.$store.getters.GET_EVENTS_DATA;
       }
